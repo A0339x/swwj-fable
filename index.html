@@ -34,7 +34,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:5.5rem}
-body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.6;color:var(--body);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.6;color:var(--body);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:clip;transition:background .3s var(--ease-out),color .3s var(--ease-out)}
 img{display:block;max-width:100%}
 a{color:inherit}
 h1,h2,h3{font-family:var(--font-display);line-height:1.02;color:var(--ink);text-wrap:balance;letter-spacing:.01em}
@@ -200,12 +200,36 @@ footer ul{list-style:none;display:grid;gap:.45rem}
 .foot-bar .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem;padding-block:1.1rem;font-family:var(--font-mono);font-size:.62rem;color:oklch(0.55 0.02 250)}
 @media(max-width:800px){footer .wrap{grid-template-columns:1fr}}
 
+/* ============ DARK MODE (manual toggle) ============ */
+:root[data-theme="dark"]{
+  --ink:        oklch(0.96 0.005 250);
+  --graphite:   oklch(0.25 0.014 250);
+  --graphite-2: oklch(0.30 0.016 250);
+  --paper:      oklch(0.17 0.010 250);
+  --steel:      oklch(0.21 0.012 250);
+  --line:       oklch(0.34 0.014 250);
+  --line-dark:  oklch(0.46 0.016 250);
+  --body:       oklch(0.84 0.010 250);
+  --muted:      oklch(0.66 0.014 250);
+  --blue-tint:  oklch(0.30 0.040 250);
+}
+:root[data-theme="dark"] .util{background:oklch(0.13 0.012 250)}
+:root[data-theme="dark"] footer{background:oklch(0.13 0.012 250)}
+:root[data-theme="dark"] .cap-row .mono,
+:root[data-theme="dark"] .step::before{color:var(--blue-hot)}
+:root[data-theme="dark"] .navlinks a:hover{color:var(--blue-hot)}
+
+/* theme toggle button */
+.theme-toggle{background:none;border:1px solid var(--line);padding:.5rem .7rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.02em;cursor:pointer;color:var(--ink);white-space:nowrap;transition:border-color .18s var(--ease-out),color .18s var(--ease-out)}
+.theme-toggle:hover{border-color:var(--blue);color:var(--blue-deep)}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   html{scroll-behavior:auto}
   .ticker-track{animation:none;width:auto;white-space:normal;flex-wrap:wrap;gap:1rem 2rem}
 }
 </style>
+<script>(function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -244,6 +268,7 @@ footer ul{list-style:none;display:grid;gap:.45rem}
     </ul>
     <a class="nav-phone" href="tel:4803067748">480.306.7748</a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="document.getElementById('nav').classList.toggle('open');this.setAttribute('aria-expanded',document.getElementById('nav').classList.contains('open'))">MENU</button>
+    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode" onclick="toggleTheme()">DARK</button>
     <a class="btn" href="#quote">Request a Quote</a>
   </div>
 </nav>
@@ -487,5 +512,24 @@ footer ul{list-style:none;display:grid;gap:.45rem}
     </div>
   </div>
 </footer>
+
+<script>
+function toggleTheme(){
+  var root=document.documentElement;
+  var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+  if(next==='dark'){root.setAttribute('data-theme','dark');}else{root.removeAttribute('data-theme');}
+  try{localStorage.setItem('theme',next);}catch(e){}
+  syncThemeToggle();
+}
+function syncThemeToggle(){
+  var isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.querySelectorAll('.theme-toggle').forEach(function(b){
+    b.textContent=isDark?'LIGHT':'DARK';
+    b.setAttribute('aria-pressed',isDark);
+    b.setAttribute('aria-label',isDark?'Switch to light mode':'Switch to dark mode');
+  });
+}
+syncThemeToggle();
+</script>
 </body>
 </html>
