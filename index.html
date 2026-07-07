@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Southwest Waterjet &amp; Laser · Precision Cutting, Quoted in 4–24 Hours · Phoenix, AZ</title>
+<meta name="description" content="Family-owned, ISO 9001:2015 contract manufacturer in Phoenix. Trumpf fiber &amp; tube lasers, the largest waterjet in Arizona (OMAX 120, 20'×10', 8&quot; steel, ±0.005&quot;), press-brake bending. Send a drawing; quoted in 4–24 hours.">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:opsz,wght@10..72,500;10..72,700;10..72,800&family=Barlow:wght@400;500;600;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS · engineering-drawing system: graphite steel + laser blue ============ */
+:root{
+  --ink:        oklch(0.20 0.010 250);
+  --graphite:   oklch(0.24 0.012 250);
+  --graphite-2: oklch(0.28 0.014 250);
+  --paper:      oklch(0.99 0.002 250);
+  --steel:      oklch(0.965 0.005 250);
+  --line:       oklch(0.87 0.010 250);
+  --line-dark:  oklch(0.38 0.015 250);
+  --body:       oklch(0.30 0.012 250);
+  --muted:      oklch(0.45 0.015 250);
+  --muted-dark: oklch(0.72 0.015 250);   /* muted text on graphite */
+  --blue:       oklch(0.54 0.190 255);   /* action fill, white text >=4.5:1 */
+  --blue-hot:   oklch(0.70 0.165 250);   /* accents on dark */
+  --blue-deep:  oklch(0.42 0.160 255);
+  --blue-tint:  oklch(0.95 0.020 250);
+  --font-display:"Big Shoulders",sans-serif;
+  --font-body:"Barlow",sans-serif;
+  --font-mono:"Martian Mono",monospace;
+  --z-sticky:10; --z-nav:20;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:5.5rem}
+body{font-family:var(--font-body);font-size:1.0625rem;line-height:1.6;color:var(--body);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font-display);line-height:1.02;color:var(--ink);text-wrap:balance;letter-spacing:.01em}
+p{max-width:68ch;text-wrap:pretty}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--blue);color:#fff;padding:.6rem 1rem;z-index:99}
+.skip:focus{left:0}
+.wrap{max-width:76rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
+.mono{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.02em}
+
+/* ============ TITLE-BLOCK SECTION SYSTEM (drawing sheet motif) ============ */
+.sheet{padding-block:clamp(3.5rem,8vw,6.5rem)}
+.sheet-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;border-block:2px solid currentColor;padding-block:.55rem;margin-bottom:clamp(2rem,5vw,3.5rem)}
+.sheet-head h2{font-size:clamp(2rem,4.5vw,3.25rem);font-weight:800;text-transform:uppercase}
+.sheet-head .mono{color:var(--muted);white-space:nowrap}
+.dark .sheet-head h2{color:#fff}
+.dark .sheet-head .mono{color:var(--muted-dark)}
+
+/* ============ UTILITY BAR ============ */
+.util{background:var(--ink);color:oklch(0.85 0.01 250)}
+.util .wrap{display:flex;justify-content:space-between;gap:1rem;padding-block:.5rem}
+.util a{color:var(--blue-hot);text-decoration:none}
+.util a:hover{text-decoration:underline}
+.util-right{display:flex;gap:1.25rem}
+@media(max-width:640px){.util .util-left span:nth-child(2){display:none}}
+@media(max-width:480px){.util .util-left{display:none}.util .wrap{justify-content:center}}
+
+/* ============ NAV ============ */
+nav.main{position:sticky;top:0;z-index:var(--z-nav);background:color-mix(in oklab,var(--paper) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.main .wrap{display:flex;align-items:center;gap:2rem;height:4.25rem}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;margin-right:auto}
+.brand img{height:2.9rem;width:auto}
+.navlinks{display:flex;gap:1.6rem;list-style:none}
+.navlinks a{text-decoration:none;font-weight:500;font-size:.95rem;color:var(--body)}
+.navlinks a:hover{color:var(--blue-deep)}
+.nav-phone{font-weight:700;text-decoration:none;color:var(--ink);white-space:nowrap}
+.btn{display:inline-block;background:var(--blue);color:#fff;font-weight:600;text-decoration:none;padding:.78rem 1.5rem;border:none;font-size:1rem;cursor:pointer;transition:background .18s var(--ease-out),transform .18s var(--ease-out)}
+.btn:hover{background:var(--blue-deep);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:#fff;border:1px solid oklch(0.55 0.02 250)}
+.btn-ghost:hover{background:oklch(0.32 0.02 250);border-color:#fff}
+.nav-toggle{display:none;background:none;border:1px solid var(--line);padding:.5rem .7rem;font-family:var(--font-mono);font-size:.7rem;cursor:pointer;color:var(--ink)}
+@media(max-width:900px){
+  .navlinks,.nav-phone{display:none}
+  .nav-toggle{display:block}
+  nav.main.open .navlinks{display:flex;flex-direction:column;position:absolute;top:4.25rem;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);padding:1.25rem clamp(1.25rem,4vw,2.5rem);gap:1rem}
+}
+
+/* ============ HERO ============ */
+.hero{background:var(--graphite);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(2rem,5vw,4rem);align-items:center;padding-block:clamp(3.5rem,8vw,6.5rem)}
+.hero h1{color:#fff;font-size:clamp(3.1rem,7.5vw,5.9rem);font-weight:800;text-transform:uppercase;letter-spacing:.005em}
+.hero h1 .beam{color:var(--blue-hot)}
+.hero-kicker{font-family:var(--font-mono);font-size:.72rem;color:var(--blue-hot);margin-bottom:1.1rem}
+.hero p.lede{color:oklch(0.82 0.012 250);font-size:1.15rem;margin-top:1.4rem;max-width:52ch}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2.1rem}
+.hero-fig{position:relative;animation:heroIn 1s var(--ease-out) .15s both}
+.hero-fig img{width:100%;aspect-ratio:4/4.6;object-fit:cover;border:1px solid var(--line-dark)}
+.hero-fig figcaption{position:absolute;left:0;bottom:0;right:0;background:linear-gradient(transparent,oklch(0.15 0.01 250/.92));color:var(--muted-dark);font-family:var(--font-mono);font-size:.68rem;padding:2.2rem .9rem .8rem}
+.hero-content{animation:heroIn .9s var(--ease-out) both}
+@keyframes heroIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--blue-hot),var(--blue) 45%,transparent 90%)}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}.hero-fig img{aspect-ratio:16/10}}
+
+/* spec ticker */
+.ticker{background:var(--ink);border-top:1px solid var(--line-dark);overflow:hidden}
+.ticker-track{display:flex;gap:3.5rem;white-space:nowrap;padding-block:.72rem;width:max-content;animation:tick 36s linear infinite}
+.ticker span{font-family:var(--font-mono);font-size:.72rem;color:var(--muted-dark)}
+.ticker b{color:var(--blue-hot);font-weight:400}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ============ TRUST BAND ============ */
+.trust .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(1.5rem,4vw,3.5rem);padding-block:1.6rem}
+.trust{border-bottom:1px solid var(--line)}
+.trust img{height:3.4rem;width:auto}
+.trust-stat{font-family:var(--font-display);font-weight:800;font-size:1.9rem;color:var(--ink);line-height:1}
+.trust-stat small{display:block;font-family:var(--font-mono);font-size:.62rem;font-weight:400;color:var(--muted);margin-top:.35rem;letter-spacing:.02em}
+.trust-spacer{flex:1}
+@media(max-width:700px){.trust-spacer{display:none}}
+
+/* ============ CAPABILITIES ============ */
+.flagship{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3.5vw,2.5rem);margin-bottom:clamp(2.5rem,5vw,4rem)}
+.flag{position:relative;color:#fff;min-height:30rem;display:flex;align-items:flex-end;overflow:hidden}
+.flag img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-out)}
+.flag:hover img{transform:scale(1.035)}
+.flag-body{position:relative;background:linear-gradient(transparent,oklch(0.14 0.012 255/.94) 55%);padding:5rem 1.8rem 1.8rem;width:100%}
+.flag h3{color:#fff;font-size:2rem;font-weight:800;text-transform:uppercase}
+.flag p{color:oklch(0.85 0.01 250);margin-top:.5rem;font-size:1rem}
+.flag .mono{display:block;color:var(--blue-hot);margin-top:.9rem}
+@media(max-width:800px){.flagship{grid-template-columns:1fr}.flag{min-height:22rem}}
+.cap-rows{border-top:1px solid var(--line)}
+.cap-row{display:grid;grid-template-columns:minmax(9rem,16rem) 1fr auto;gap:1.5rem;align-items:baseline;padding:1.15rem 0;border-bottom:1px solid var(--line)}
+.cap-row h3{font-size:1.35rem;font-weight:700;text-transform:uppercase}
+.cap-row p{color:var(--muted);font-size:.98rem}
+.cap-row .mono{color:var(--blue-deep);white-space:nowrap}
+@media(max-width:700px){.cap-row{grid-template-columns:1fr;gap:.3rem}}
+
+/* ============ EQUIPMENT (dark) ============ */
+.dark{background:var(--graphite);color:oklch(0.85 0.01 250)}
+.equip-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:clamp(2rem,5vw,3.5rem);align-items:start}
+table.spec{width:100%;border-collapse:collapse;font-size:.95rem}
+table.spec th{font-family:var(--font-mono);font-size:.62rem;font-weight:400;color:var(--muted-dark);text-align:left;padding:.5rem .75rem .5rem 0;border-bottom:1px solid var(--line-dark)}
+table.spec td{padding:.85rem .75rem .85rem 0;border-bottom:1px solid oklch(0.32 0.014 250);vertical-align:top}
+table.spec td:first-child{font-weight:600;color:#fff}
+table.spec td.num{font-family:var(--font-mono);font-size:.78rem;color:var(--blue-hot)}
+.equip-figs{display:grid;gap:1.25rem}
+.equip-figs figure{position:relative}
+.equip-figs img{width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line-dark)}
+.equip-figs figcaption{font-family:var(--font-mono);font-size:.65rem;color:var(--muted-dark);margin-top:.5rem}
+@media(max-width:900px){.equip-grid{grid-template-columns:1fr}}
+
+/* ============ MATERIALS ============ */
+.mat-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem)}
+.mat-cols h3{font-size:1.5rem;text-transform:uppercase;font-weight:800;margin-bottom:1rem}
+.mat-list{list-style:none;columns:2;gap:2rem;font-size:1.05rem}
+.mat-list li{padding:.34rem 0;border-bottom:1px solid var(--line);break-inside:avoid}
+.mat-note{margin-top:1.2rem;color:var(--muted);font-size:.95rem}
+@media(max-width:800px){.mat-cols{grid-template-columns:1fr}}
+
+/* ============ INDUSTRIES strip ============ */
+.industries{background:var(--steel);border-block:1px solid var(--line)}
+.industries .wrap{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 2.2rem;padding-block:2.2rem}
+.industries .lbl{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);margin-right:1rem}
+.industries span{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:1.35rem;color:var(--ink)}
+
+/* ============ PROCESS ============ */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,3rem);counter-reset:step}
+.step{border-top:3px solid var(--ink);padding-top:1.2rem;position:relative}
+.step::before{counter-increment:step;content:"0" counter(step);font-family:var(--font-mono);font-size:.8rem;color:var(--blue-deep)}
+.step h3{font-size:1.6rem;text-transform:uppercase;font-weight:800;margin:.5rem 0 .55rem}
+.step p{font-size:.99rem;color:var(--muted)}
+.step .mono{display:block;margin-top:.9rem;color:var(--body)}
+@media(max-width:800px){.steps{grid-template-columns:1fr}}
+
+/* ============ RFQ (drenched) ============ */
+.rfq{background:var(--blue);color:#fff}
+.rfq .wrap{padding-block:clamp(3.5rem,8vw,6rem);display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:clamp(2rem,5vw,4rem);align-items:center}
+.rfq h2{color:#fff;font-size:clamp(2.6rem,6vw,4.6rem);font-weight:800;text-transform:uppercase}
+.rfq p{color:oklch(0.94 0.03 250);margin-top:1rem;font-size:1.1rem}
+.rfq .formats{font-family:var(--font-mono);font-size:.7rem;color:oklch(0.90 0.05 250);margin-top:1.6rem;line-height:2}
+.rfq-panel{background:oklch(0.36 0.15 255);padding:2rem;display:grid;gap:1.1rem}
+.rfq-panel a.big{font-family:var(--font-display);font-size:2rem;font-weight:800;color:#fff;text-decoration:none;line-height:1.1;overflow-wrap:anywhere}
+.rfq-panel .mono{color:oklch(0.88 0.06 250)}
+.btn-inverse{background:#fff;color:var(--blue-deep);text-align:center}
+.btn-inverse:hover{background:oklch(0.93 0.02 250);transform:translateY(-1px)}
+@media(max-width:850px){.rfq .wrap{grid-template-columns:1fr}}
+
+/* ============ FOOTER ============ */
+footer{background:var(--ink);color:var(--muted-dark)}
+footer .wrap{padding-block:3rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;font-size:.95rem}
+footer h4{font-family:var(--font-mono);font-size:.65rem;font-weight:400;color:oklch(0.55 0.02 250);margin-bottom:.9rem;letter-spacing:.05em}
+footer a{color:oklch(0.88 0.01 250);text-decoration:none}
+footer a:hover{color:var(--blue-hot)}
+footer ul{list-style:none;display:grid;gap:.45rem}
+.foot-plate{display:inline-block;background:#fff;padding:.55rem .8rem}
+.foot-tag{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:1.7rem;color:#fff;line-height:1.15;margin-top:1rem}
+.foot-bar{border-top:1px solid var(--line-dark)}
+.foot-bar .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem;padding-block:1.1rem;font-family:var(--font-mono);font-size:.62rem;color:oklch(0.55 0.02 250)}
+@media(max-width:800px){footer .wrap{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .ticker-track{animation:none;width:auto;white-space:normal;flex-wrap:wrap;gap:1rem 2rem}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- utility bar -->
+<div class="util mono">
+  <div class="wrap">
+    <div class="util-left"><span>ISO 9001:2015 CERTIFIED</span> <span>&nbsp;·&nbsp; TWO SHIFTS DAILY · PHOENIX, AZ</span></div>
+    <div class="util-right">
+      <a href="tel:4803067748">480·306·7748</a>
+      <a href="http://paynow.aiwyn.ai/SWWJ">PAY NOW ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- nav -->
+<nav class="main" id="nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="images/logo.png" alt="Southwest Waterjet &amp; Laser, home">
+    </a>
+    <ul class="navlinks">
+      <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#equipment">Equipment</a></li>
+      <li><a href="#materials">Materials</a></li>
+      <li><a href="#quality">Quality</a></li>
+      <li><a href="#quote">Contact</a></li>
+    </ul>
+    <a class="nav-phone" href="tel:4803067748">480.306.7748</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="document.getElementById('nav').classList.toggle('open');this.setAttribute('aria-expanded',document.getElementById('nav').classList.contains('open'))">MENU</button>
+    <a class="btn" href="#quote">Request a Quote</a>
+  </div>
+</nav>
+
+<main id="main">
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-content">
+      <p class="hero-kicker">SOUTHWEST WATERJET &amp; LASER · PHOENIX, AZ · SINCE 2003</p>
+      <h1>Send a drawing.<br>Get parts <span class="beam">cut&nbsp;to&nbsp;±0.005″.</span></h1>
+      <p class="lede">Family-owned, ISO 9001:2015 contract manufacturer running Trumpf fiber and tube lasers and the largest waterjet in Arizona. Quotes land in 4–24 hours, and the shop cuts on two shifts a day.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="#quote">Request a Quote →</a>
+        <a class="btn btn-ghost" href="#capabilities">Explore capabilities</a>
+      </div>
+    </div>
+    <figure class="hero-fig">
+      <img src="images/hero-tube-laser.webp" alt="Trumpf TruLaser Tube 5000 cutting structural steel tube at the Phoenix shop" fetchpriority="high">
+      <figcaption>TRUMPF TRULASER TUBE 5000 · FIRST TUBE LASER IN ARIZONA</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- spec ticker -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>OMAX 120 WATERJET <b>20′×10′ BED</b></span><span>CUTS UP TO <b>8″ STEEL</b></span><span>TOLERANCE <b>±0.005″</b></span><span>QUOTES IN <b>4–24 HRS</b></span><span>TRUMPF TRUBEND <b>120″ BENDING</b></span><span>FIBER LASER <b>6 kW</b></span><span>SHIPS <b>US · MX · CA</b></span>
+    <span>OMAX 120 WATERJET <b>20′×10′ BED</b></span><span>CUTS UP TO <b>8″ STEEL</b></span><span>TOLERANCE <b>±0.005″</b></span><span>QUOTES IN <b>4–24 HRS</b></span><span>TRUMPF TRUBEND <b>120″ BENDING</b></span><span>FIBER LASER <b>6 kW</b></span><span>SHIPS <b>US · MX · CA</b></span>
+  </div>
+</div>
+
+<!-- trust band -->
+<div class="trust" id="quality">
+  <div class="wrap">
+    <img src="images/iso.jpg" alt="ISO 9001:2015 certified">
+    <img src="images/ntma.png" alt="NTMA, National Tooling and Machining Association member">
+    <div class="trust-spacer"></div>
+    <div class="trust-stat">20+<small>YEARS IN PHOENIX</small></div>
+    <div class="trust-stat">4–24<small>HOUR QUOTES</small></div>
+    <div class="trust-stat">2×<small>SHIFTS PER DAY</small></div>
+    <div class="trust-stat">±0.005″<small>HELD TOLERANCE</small></div>
+  </div>
+</div>
+
+<!-- CAPABILITIES -->
+<section class="sheet" id="capabilities">
+  <div class="wrap">
+    <div class="sheet-head">
+      <h2>What we cut &amp; form</h2>
+      <span class="mono">SHT 01 · CAPABILITIES · REV C</span>
+    </div>
+
+    <div class="flagship">
+      <article class="flag">
+        <img src="images/waterjet-bed.webp" alt="OMAX 120 waterjet, the largest waterjet bed in Arizona, cutting thick plate underwater">
+        <div class="flag-body">
+          <h3>Waterjet Cutting</h3>
+          <p>5-axis abrasive waterjet on the largest bed in Arizona. No heat-affected zone: cut hardened steel, glass, granite, or carbon fiber to the same tolerance.</p>
+          <span class="mono">OMAX 120 · 20′×10′ · 8″ STEEL · ±0.005″</span>
+        </div>
+      </article>
+      <article class="flag">
+        <img src="images/tube-parts.jpg" alt="Laser-cut steel tube and structural sections, coped and slotted on the Trumpf Tube 5000">
+        <div class="flag-body">
+          <h3>Tube Laser Cutting</h3>
+          <p>Round, square and rectangular tube cut, coped and slotted in one setup on the first Trumpf tube laser in Arizona. Weldments fit the first time.</p>
+          <span class="mono">TRUMPF TRULASER TUBE 5000</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="cap-rows">
+      <div class="cap-row">
+        <h3>Laser Cutting</h3>
+        <p>High-speed fiber laser on sheet and plate: clean edges, tight nests, fast turnarounds.</p>
+        <span class="mono">TRULASER 3040 · 6kW · 13′×6.5′</span>
+      </div>
+      <div class="cap-row">
+        <h3>Press-Brake Bending</h3>
+        <p>Accurate, repeatable forming integrated with our cutting. One vendor, one tolerance stack.</p>
+        <span class="mono">TRUBEND 5130 · 120″</span>
+      </div>
+      <div class="cap-row">
+        <h3>2D Inspection</h3>
+        <p>In-process 2D inspection verifies parts against your drawing before anything ships.</p>
+        <span class="mono">INSPECTION PLANNER 2D</span>
+      </div>
+      <div class="cap-row">
+        <h3>Material Sales</h3>
+        <p>Full, half and quarter sheets from the same stock we cut. Metals and more.</p>
+        <span class="mono">SHEET · PLATE · TUBE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section class="sheet dark" id="equipment">
+  <div class="wrap">
+    <div class="sheet-head">
+      <h2>The machine list</h2>
+      <span class="mono">SHT 02 · EQUIPMENT · REV C</span>
+    </div>
+    <div class="equip-grid">
+      <table class="spec">
+        <thead><tr><th scope="col">MACHINE</th><th scope="col">PROCESS</th><th scope="col">CAPACITY</th></tr></thead>
+        <tbody>
+          <tr><td>OMAX 120</td><td>5-axis waterjet</td><td class="num">20′×10′ · 8″ STEEL · ±0.005″</td></tr>
+          <tr><td>Trumpf TruLaser Tube 5000</td><td>Tube laser</td><td class="num">RND · SQ · RECT TUBE</td></tr>
+          <tr><td>Trumpf TruLaser 3040</td><td>Fiber laser</td><td class="num">6 kW · 13′×6.5′</td></tr>
+          <tr><td>Trumpf TruLaser 5040</td><td>Fiber laser</td><td class="num">HIGH-SPEED PLATE</td></tr>
+          <tr><td>Trumpf TruLaser 2030</td><td>Fiber laser</td><td class="num">4 kW · 60″×120″ · .5″ CS</td></tr>
+          <tr><td>Trumpf TruBend 5130</td><td>Press brake</td><td class="num">120″ FORMING</td></tr>
+        </tbody>
+      </table>
+      <div class="equip-figs">
+        <figure>
+          <img src="images/trulaser-3040.webp" alt="Trumpf TruLaser 3040 6-kilowatt fiber laser on the shop floor" loading="lazy">
+          <figcaption>TRULASER 3040 · 6 kW FIBER</figcaption>
+        </figure>
+        <figure>
+          <img src="images/inspection.jpg" alt="2D inspection planner verifying a cut part against the customer drawing" loading="lazy">
+          <figcaption>2D INSPECTION · VERIFIED BEFORE IT SHIPS</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALS -->
+<section class="sheet" id="materials">
+  <div class="wrap">
+    <div class="sheet-head">
+      <h2>Materials we cut</h2>
+      <span class="mono">SHT 03 · MATERIALS · REV C</span>
+    </div>
+    <div class="mat-cols">
+      <div>
+        <h3>Metals</h3>
+        <ul class="mat-list">
+          <li>Carbon steel</li><li>Stainless steel</li><li>Aluminum</li><li>Copper</li>
+          <li>Brass</li><li>Bronze</li><li>Nickel</li><li>Titanium</li><li>Tungsten</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Exotics &amp; non-metals</h3>
+        <ul class="mat-list">
+          <li>Carbon fiber</li><li>Kevlar</li><li>Composites</li><li>Ceramics</li><li>Glass</li>
+          <li>Granite &amp; marble</li><li>Fiberglass</li><li>Plastics</li><li>VCT tile</li>
+        </ul>
+        <p class="mat-note">The waterjet cuts cold: no heat-affected zone, no burned edges, no material off the table.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<div class="industries">
+  <div class="wrap">
+    <span class="lbl mono">SERVING</span>
+    <span>Aerospace</span><span>Defense</span><span>Automotive</span><span>Architecture</span><span>Energy</span><span>Medical &amp; Dental</span><span>Fabricators</span><span>Makers</span>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section class="sheet">
+  <div class="wrap">
+    <div class="sheet-head">
+      <h2>Drawing to dock in three steps</h2>
+      <span class="mono">SHT 04 · PROCESS · REV C</span>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h3>Send your file</h3>
+        <p>CAD, PDF, or a sketch. Email it or call it in. Factory-trained estimators read it the way you drew it.</p>
+        <span class="mono">.STEP .DXF .DWG .PDF .AI +9 MORE</span>
+      </div>
+      <div class="step">
+        <h3>Quoted in 4–24 hrs</h3>
+        <p>Real quotes from the people running the machines, with material options and lead time. No black box.</p>
+        <span class="mono">EXPEDITE AVAILABLE</span>
+      </div>
+      <div class="step">
+        <h3>Cut, formed, shipped</h3>
+        <p>Two shifts a day, inspected against your drawing, shipped across the US, Mexico and Canada.</p>
+        <span class="mono">ISO 9001:2015 QMS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RFQ -->
+<section class="rfq" id="quote">
+  <div class="wrap">
+    <div>
+      <h2>Get your parts quoted today.</h2>
+      <p>Email your drawing or call the shop. A real estimator answers, and quotes land in 4–24 hours.</p>
+      <p class="formats">WE ACCEPT&nbsp; .PDF · .STEP · .STP · .IGES · .IGS · .DXF · .DWG · .STL · .SLD · .SAT · .AI · .EPS · .MODEL</p>
+    </div>
+    <div class="rfq-panel">
+      <a class="big" href="tel:4803067748">480.306.7748</a>
+      <span class="mono">MON–FRI · TWO SHIFTS DAILY</span>
+      <a class="btn btn-inverse" href="mailto:info@swwj-laser.com?subject=Quote%20request%20%E2%80%94%20drawing%20attached">Email a drawing →</a>
+      <span class="mono">INFO@SWWJ-LASER.COM</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div>
+      <span class="foot-plate"><img src="images/logo.png" alt="" width="140" loading="lazy"></span>
+      <p class="foot-tag">Understand.<br>Deliver. Improve.</p>
+    </div>
+    <div>
+      <h4>THE SHOP</h4>
+      <ul>
+        <li>788 W. Illini St</li>
+        <li>Phoenix, AZ 85041</li>
+        <li><a href="tel:4803067748">480.306.7748</a></li>
+        <li><a href="mailto:info@swwj-laser.com">info@swwj-laser.com</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="#capabilities">Capabilities</a></li>
+        <li><a href="#equipment">Equipment</a></li>
+        <li><a href="#materials">Materials</a></li>
+        <li><a href="http://paynow.aiwyn.ai/SWWJ">Pay an invoice ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <div class="wrap">
+      <span>© 2026 SOUTHWEST WATERJET CORP. · FAMILY-OWNED · PHOENIX, ARIZONA</span>
+      <span>ISO 9001:2015 · NTMA MEMBER</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
