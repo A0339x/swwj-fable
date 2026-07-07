@@ -231,8 +231,15 @@ footer ul{list-style:none;display:grid;gap:.45rem}
 }
 </style>
 <script>
-/* apply saved theme before paint to avoid a flash */
-(function(){try{if(localStorage.getItem('theme')==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();
+/* apply theme before paint to avoid a flash: honour the saved choice first,
+   otherwise follow the visitor's OS colour-scheme preference */
+(function(){try{
+  var saved=localStorage.getItem('theme');
+  var prefersDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if(saved==='dark'||(saved!=='light'&&prefersDark)){
+    document.documentElement.setAttribute('data-theme','dark');
+  }
+}catch(e){}})();
 </script>
 </head>
 <body>
