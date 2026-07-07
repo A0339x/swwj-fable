@@ -53,6 +53,12 @@ p{max-width:68ch;text-wrap:pretty}
 .dark .sheet-head h2{color:#fff}
 .dark .sheet-head .mono{color:var(--muted-dark)}
 
+/* ============ PROMO BANNER ============ */
+.promo{background:var(--blue);color:#fff}
+.promo .wrap{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.5rem 1.25rem;padding-block:.6rem;text-align:center}
+.promo strong{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:1.2rem;letter-spacing:.02em;color:#fff}
+.promo .btn{padding:.4rem 1.1rem;font-size:.9rem}
+
 /* ============ UTILITY BAR ============ */
 .util{background:var(--ink);color:oklch(0.85 0.01 250)}
 .util .wrap{display:flex;justify-content:space-between;gap:1rem;padding-block:.5rem}
@@ -203,6 +209,14 @@ footer ul{list-style:none;display:grid;gap:.45rem}
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- promo banner -->
+<div class="promo">
+  <div class="wrap">
+    <strong>15% off any first order</strong>
+    <a class="btn btn-inverse" href="#quote">Get a Quote →</a>
+  </div>
+</div>
 
 <!-- utility bar -->
 <div class="util mono">
