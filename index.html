@@ -219,9 +219,15 @@ footer ul{list-style:none;display:grid;gap:.45rem}
 :root[data-theme="dark"] .step::before{color:var(--blue-hot)}
 :root[data-theme="dark"] .navlinks a:hover{color:var(--blue-hot)}
 
-/* theme toggle button */
-.theme-toggle{background:none;border:1px solid var(--line);padding:.5rem .7rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.02em;cursor:pointer;color:var(--ink);white-space:nowrap;transition:border-color .18s var(--ease-out),color .18s var(--ease-out)}
-.theme-toggle:hover{border-color:var(--blue);color:var(--blue-deep)}
+/* theme toggle (sun / moon pill) */
+.theme-toggle{position:relative;display:inline-flex;align-items:center;gap:.3rem;padding:.25rem;background:var(--steel);border:1px solid var(--line);border-radius:999px;cursor:pointer;line-height:0;transition:border-color .18s var(--ease-out),background .3s var(--ease-out)}
+.theme-toggle:hover{border-color:var(--blue)}
+.theme-toggle .tt-thumb{position:absolute;top:.25rem;left:.25rem;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--blue);box-shadow:0 1px 3px oklch(0.2 0.05 255/.35);transition:transform .25s var(--ease-out)}
+.theme-toggle .tt-icon{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:1.9rem;height:1.9rem;color:var(--muted);transition:color .2s var(--ease-out)}
+.theme-toggle .tt-sun{color:#fff}
+:root[data-theme="dark"] .theme-toggle .tt-thumb{transform:translateX(2.2rem)}
+:root[data-theme="dark"] .theme-toggle .tt-sun{color:var(--muted)}
+:root[data-theme="dark"] .theme-toggle .tt-moon{color:#fff}
 
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -268,7 +274,11 @@ footer ul{list-style:none;display:grid;gap:.45rem}
     </ul>
     <a class="nav-phone" href="tel:4803067748">480.306.7748</a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="document.getElementById('nav').classList.toggle('open');this.setAttribute('aria-expanded',document.getElementById('nav').classList.contains('open'))">MENU</button>
-    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode" onclick="toggleTheme()">DARK</button>
+    <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Switch to dark mode" onclick="toggleTheme()">
+      <span class="tt-thumb" aria-hidden="true"></span>
+      <span class="tt-icon tt-sun" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2M12 19.5v2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M2.5 12h2M19.5 12h2M4.9 19.1l1.5-1.5M17.6 6.4l1.5-1.5"></path></svg></span>
+      <span class="tt-icon tt-moon" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+    </button>
     <a class="btn" href="#quote">Request a Quote</a>
   </div>
 </nav>
@@ -524,8 +534,7 @@ function toggleTheme(){
 function syncThemeToggle(){
   var isDark=document.documentElement.getAttribute('data-theme')==='dark';
   document.querySelectorAll('.theme-toggle').forEach(function(b){
-    b.textContent=isDark?'LIGHT':'DARK';
-    b.setAttribute('aria-pressed',isDark);
+    b.setAttribute('aria-checked',isDark);
     b.setAttribute('aria-label',isDark?'Switch to light mode':'Switch to dark mode');
   });
 }
