@@ -219,9 +219,15 @@ footer ul{list-style:none;display:grid;gap:.45rem}
 :root[data-theme="dark"] .step::before{color:var(--blue-hot)}
 :root[data-theme="dark"] .navlinks a:hover{color:var(--blue-hot)}
 
-/* theme toggle button */
-.theme-toggle{background:none;border:1px solid var(--line);padding:.5rem .7rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.02em;cursor:pointer;color:var(--ink);white-space:nowrap;transition:border-color .18s var(--ease-out),color .18s var(--ease-out)}
-.theme-toggle:hover{border-color:var(--blue);color:var(--blue-deep)}
+/* theme toggle switch (icon only) */
+.theme-toggle{position:relative;flex-shrink:0;width:3.5rem;height:1.85rem;padding:0;border:1px solid var(--line);border-radius:999px;background:var(--steel);cursor:pointer;display:inline-flex;align-items:center;transition:background .2s var(--ease-out),border-color .18s var(--ease-out)}
+.theme-toggle:hover{border-color:var(--blue)}
+.theme-toggle .knob{position:absolute;top:50%;left:.2rem;transform:translateY(-50%);width:1.35rem;height:1.35rem;border-radius:50%;background:var(--blue);display:grid;place-items:center;color:#fff;transition:left .2s var(--ease-out),background .2s var(--ease-out)}
+.theme-toggle .knob svg{width:.85rem;height:.85rem;display:block}
+.theme-toggle .icon-moon{display:none}
+:root[data-theme="dark"] .theme-toggle .knob{left:calc(100% - 1.55rem)}
+:root[data-theme="dark"] .theme-toggle .icon-sun{display:none}
+:root[data-theme="dark"] .theme-toggle .icon-moon{display:block}
 
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -268,8 +274,13 @@ footer ul{list-style:none;display:grid;gap:.45rem}
     </ul>
     <a class="nav-phone" href="tel:4803067748">480.306.7748</a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="document.getElementById('nav').classList.toggle('open');this.setAttribute('aria-expanded',document.getElementById('nav').classList.contains('open'))">MENU</button>
-    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode" onclick="toggleTheme()">DARK</button>
     <a class="btn" href="#quote">Request a Quote</a>
+    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode" onclick="toggleTheme()">
+      <span class="knob">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </span>
+    </button>
   </div>
 </nav>
 
@@ -524,7 +535,6 @@ function toggleTheme(){
 function syncThemeToggle(){
   var isDark=document.documentElement.getAttribute('data-theme')==='dark';
   document.querySelectorAll('.theme-toggle').forEach(function(b){
-    b.textContent=isDark?'LIGHT':'DARK';
     b.setAttribute('aria-pressed',isDark);
     b.setAttribute('aria-label',isDark?'Switch to light mode':'Switch to dark mode');
   });
